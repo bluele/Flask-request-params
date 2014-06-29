@@ -2,6 +2,9 @@
 Flask-request-params
 =====================
 
+.. image:: https://travis-ci.org/bluele/Flask-request-params.svg?branch=master
+    :target: https://travis-ci.org/bluele/Flask-request-params
+
 
 Rails like interface for HTTP Request parameter of Flask.
 
