@@ -5,8 +5,12 @@ from os.path import dirname, abspath, join, isfile
 import platform
 
 cwd = abspath(dirname(__file__))
-version = platform.python_version()
+module_path = join(cwd, 'flask_request_params', '__init__.py')
+python_version = platform.python_version()
 install_requires = []
+version_line = [line for line in open(module_path)
+                if line.startswith('__version_info__')][0]
+__version__ = '.'.join(eval(version_line.split('__version_info__ = ')[-1]))
 
 
 def install_requirements():
@@ -28,7 +32,7 @@ install_requirements()
 
 setup(
     name='Flask-request-params',
-    version='0.1.0',
+    version=__version__,
     description="Rails like interface for HTTP Request parameter of Flask.",
     long_description=read_file('README.rst'),
     license='MIT',
