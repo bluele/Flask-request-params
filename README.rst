@@ -6,7 +6,7 @@ Flask-request-params
     :target: https://travis-ci.org/bluele/Flask-request-params
 
 
-Rails like interface for HTTP Request parameter of Flask.
+Flask-request-params provides rails-like "request.params" interface for Flask.
 
 
 Installation
