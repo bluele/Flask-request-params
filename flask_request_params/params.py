@@ -23,7 +23,7 @@ class Params(object):
         self._params.update(args)
 
     def __assign_get_args(self, args):
-        for k, v in args.iteritems():
+        for k, v in args._iter_hashitems():
             if isinstance(v, list) and len(v) == 1:
                 self._params[k] = v[0]
             else:
