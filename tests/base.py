@@ -14,9 +14,15 @@ class TestCase(object):
         app = Flask(__name__)
         app.secret_key = 'secret'
 
-        @app.route('/', methods=['POST'])
+        @app.route('/', methods=['GET', 'POST'])
         def index():
             params = get_request_params()
+            return jsonify(params)
+
+        @app.route('/require/user', methods=['POST'])
+        def require_user():
+            params = get_request_params()
+            params.require('user')
             return jsonify(params)
 
         return app
