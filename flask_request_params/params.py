@@ -9,7 +9,7 @@ class Params(object):
 
     def __init__(self, base_params=None):
         self._params = base_params or {}
-        self.__assign_args(request.args)
+        self.__assign_get_args(request.args)
         if request.view_args is not None:
             self.__assign_args(request.view_args)
         if request.json:
@@ -21,6 +21,13 @@ class Params(object):
 
     def __assign_args(self, args):
         self._params.update(args)
+
+    def __assign_get_args(self, args):
+        for k, v in args.iteritems():
+            if isinstance(v, list) and len(v) == 1:
+                self._params[k] = v[0]
+            else:
+                self._params[k] = v
 
     def __assign_body(self, items):
         queries = []
