@@ -40,9 +40,8 @@ setup(
     author_email='jksmphone@gmail.com',
     url='https://github.com/bluele/flask-request-params',
     classifiers=[
-    'Development Status :: 3 - Alpha',
-    'Environment :: Console',
-    'Topic :: System :: Shells',
+    'Development Status :: 4 - Beta',
+    'Framework :: Flask',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python',
     'Programming Language :: Python :: 2',
