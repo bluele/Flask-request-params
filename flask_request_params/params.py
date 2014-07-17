@@ -62,9 +62,9 @@ class Params(object):
         return self._params[item]
 
     def require(self, key):
-        if key in self._params:
+        if key not in self._params:
             raise ValueError(key)
-        return Params(self._params, is_parse=False)
+        return Params(self._params[key], is_parse=False)
 
     def permit(self, *args):
         params = dict()

@@ -22,7 +22,6 @@ class TestCase(object):
         @app.route('/require/user', methods=['POST'])
         def require_user():
             params = get_request_params()
-            params.require('user')
-            return jsonify(params)
+            return jsonify(params.require('user'))
 
         return app
