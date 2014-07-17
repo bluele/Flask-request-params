@@ -27,13 +27,10 @@ def index():
 
 @app.route('/user', methods=['POST'])
 def create_user():
-    params = request.params['user']
-    user = User(name=params['name'], password=params['password'])
+    params = request.params.require('user').permit('name', 'password')
+    user = User(**params)
     user.save()
-    return jsonify({
-            'status': 'ok',
-            'params': params
-        })
+    return jsonify(params)
 
 
 @app.route('/echo/<path>', methods=['GET', 'POST'])

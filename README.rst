@@ -8,6 +8,8 @@ Flask-request-params
 
 Flask-request-params provides Rails-like interface to HTTP Request Parameters for Flask.
 
+Supports mixed parameters(GET, POST, POST-JSON), `Rails Strong_Parameters <https://github.com/bluele/Flask-request-params/tree/master/examples>`_.
+
 
 Installation
 ------------
@@ -27,7 +29,9 @@ Or alternatively, you can download the repository and install manually by doing:
 Examples
 --------
 
-**Flask code**
+See `examples <https://github.com/bluele/Flask-request-params/tree/master/examples>`_ for more code.
+
+**Server code**
 
 ::
 
@@ -45,10 +49,17 @@ Examples
     def echo(path):
         return jsonify(request.params)
 
+    @app.route('/user', methods=['POST'])
+    def create_user():
+        user = request.params.require('user'),permit('name', 'password')
+        # do something
+        return jsonify(user)
+
+    # serve at localhost:5000
     app.run(debug=True)
 
 
-**Command Line**
+**Client code**
 
 ::
 
@@ -70,4 +81,11 @@ Examples
         "python",
         "golang"
       ]
+    }
+
+    # support strong_parameters
+    $ curl -X POST http://localhost:5000/user -d 'user[name]=bluele&user[password]=password'
+    {
+      "name": "bluele",
+      "password": "password"
     }
