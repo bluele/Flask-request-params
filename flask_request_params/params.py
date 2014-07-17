@@ -7,17 +7,18 @@ from flask import request
 
 class Params(object):
 
-    def __init__(self, base_params=None):
+    def __init__(self, base_params=None, is_parse=True):
         self._params = base_params or {}
-        self.__assign_get_args(request.args)
-        if request.view_args is not None:
-            self.__assign_args(request.view_args)
-        if request.json:
-            self.__assign_args(request.json)
-        else:
-            if request.files:
-                self.__assign_args(request.files)
-            self.__assign_body(request.form.items(multi=True))
+        if is_parse:
+            self.__assign_get_args(request.args)
+            if request.view_args is not None:
+                self.__assign_args(request.view_args)
+            if request.json:
+                self.__assign_args(request.json)
+            else:
+                if request.files:
+                    self.__assign_args(request.files)
+                self.__assign_body(request.form.items(multi=True))
 
     def __assign_args(self, args):
         self._params.update(args)
@@ -59,6 +60,18 @@ class Params(object):
 
     def __getitem__(self, item):
         return self._params[item]
+
+    def require(self, key):
+        if key in self._params:
+            raise ValueError(key)
+        return Params(self._params, is_parse=False)
+
+    def permit(self, *args):
+        params = dict()
+        for k in args:
+            if k in self._params:
+                params[k] = self._params[k]
+        return Params(params, is_parse=False)
 
 
 def get_request_params(base_params=None):
