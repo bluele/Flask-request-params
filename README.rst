@@ -51,7 +51,7 @@ See `examples <https://github.com/bluele/Flask-request-params/tree/master/exampl
 
     @app.route('/user', methods=['POST'])
     def create_user():
-        user = request.params.require('user'),permit('name', 'password')
+        user = request.params.require('user').permit('name', 'password')
         # do something
         return jsonify(user)
 
