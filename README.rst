@@ -8,7 +8,7 @@ Flask-request-params
 
 Flask-request-params provides Rails-like interface to HTTP Request Parameters for Flask.
 
-Supports mixed parameters(GET, POST, POST-JSON), `Rails Strong_Parameters <https://github.com/bluele/Flask-request-params/tree/master/examples>`_.
+Supports mixed parameters(GET, POST, POST-JSON), `Rails Strong_Parameters <https://github.com/rails/strong_parameters>`_.
 
 
 Installation
