@@ -24,4 +24,9 @@ class TestCase(object):
             params = get_request_params()
             return jsonify(params.require('user'))
 
+        @app.route('/permit/user', methods=['POST'])
+        def permit_user():
+            params = get_request_params()
+            return jsonify(params.require('user').permit('name', 'age'))
+
         return app
