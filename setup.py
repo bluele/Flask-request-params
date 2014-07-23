@@ -33,7 +33,7 @@ install_requirements()
 setup(
     name='Flask-request-params',
     version=__version__,
-    description="Rails like interface for HTTP Request parameter of Flask.",
+    description="Flask-request-params provides Rails-like interface to HTTP Request Parameters for Flask.",
     long_description=read_file('README.rst'),
     license='MIT',
     author='bluele',
@@ -48,6 +48,7 @@ setup(
     'Programming Language :: Python :: 2.6',
     'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3.3',
+    'Programming Language :: Python :: 3.4',
     ],
     include_package_data=True,
     packages=find_packages(),
