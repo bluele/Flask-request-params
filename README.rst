@@ -31,34 +31,6 @@ Examples
 
 See `examples <https://github.com/bluele/Flask-request-params/tree/master/examples>`_ for more code.
 
-**Server code**
-
-::
-
-    from flask import Flask, request, render_template, jsonify
-    from flask_request_params import bind_request_params
-
-
-    app = Flask(__name__)
-    app.secret_key = 'secret'
-    # bind rails like params to request.params
-    app.before_request(bind_request_params)
-
-    # just return request.params
-    @app.route('/echo/<path>', methods=['GET', 'POST'])
-    def echo(path):
-        return jsonify(request.params)
-
-    @app.route('/user', methods=['POST'])
-    def create_user():
-        user = request.params.require('user').permit('name', 'password')
-        # do something
-        return jsonify(user)
-
-    # serve at localhost:5000
-    app.run(debug=True)
-
-
 **Client code**
 
 ::
@@ -89,3 +61,33 @@ See `examples <https://github.com/bluele/Flask-request-params/tree/master/exampl
       "name": "bluele",
       "password": "password"
     }
+
+
+**Server code**
+
+::
+
+    from flask import Flask, request, render_template, jsonify
+    from flask_request_params import bind_request_params
+
+
+    app = Flask(__name__)
+    app.secret_key = 'secret'
+    # bind rails like params to request.params
+    app.before_request(bind_request_params)
+
+    # just return request.params
+    @app.route('/echo/<path>', methods=['GET', 'POST'])
+    def echo(path):
+        return jsonify(request.params)
+
+    @app.route('/user', methods=['POST'])
+    def create_user():
+        user = request.params.require('user').permit('name', 'password')
+        # do something
+        return jsonify(user)
+
+    # serve at localhost:5000
+    app.run(debug=True)
+
+
