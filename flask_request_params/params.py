@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 from __future__ import with_statement
 from functools import reduce
+from types import MethodType
 
 from flask import request
 
@@ -75,7 +76,9 @@ class Params(object):
 
 
 def get_request_params(base_params=None):
-    return Params(base_params)
+    if not hasattr(request, '_request_params'):
+        setattr(request, '_request_params', Params(base_params))
+    return getattr(request, '_request_params')
 
 
 def bind_request_params(attr_name='params'):
