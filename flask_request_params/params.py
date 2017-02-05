@@ -5,7 +5,7 @@ from functools import reduce
 from flask import request
 
 
-class Params(object):
+class Params(dict):
 
     def __init__(self, base_params=None, is_parse=True):
         self._params = base_params or {}
@@ -55,12 +55,6 @@ class Params(object):
                     a[k] = v
         deep_merge(self._params, other)
 
-    def __getattr__(self, item):
-        return getattr(self._params, item)
-
-    def __getitem__(self, item):
-        return self._params[item]
-
     def require(self, key):
         if key not in self._params:
             raise ValueError(key)
@@ -72,6 +66,39 @@ class Params(object):
             if k in self._params:
                 params[k] = self._params[k]
         return Params(params, is_parse=False)
+
+    def __getattr__(self, item):
+        return getattr(self._params, item)
+
+    def __getitem__(self, item):
+        return self._params[item]
+
+    def __setitem__(self, k, v):
+        raise NotImplementedError
+
+    def __len__(self):
+        return len(self._params)
+
+    def __iter__(self):
+        return self._params.__iter__()
+
+    def keys(self):
+        return self._params.keys()
+
+    def values(self):
+        return self._params.values()
+
+    def items(self):
+        return self._params.items()
+
+    def iterkeys(self):
+        return self._params.iterkeys()
+
+    def itervalues(self):
+        return self._params.itervalues()
+
+    def iteritems(self):
+        return self._params.iteritems()
 
 
 def get_request_params(base_params=None):
