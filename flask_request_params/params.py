@@ -13,7 +13,7 @@ class Params(dict):
             self.__assign_get_args(request.args)
             if request.view_args is not None:
                 self.__assign_args(request.view_args)
-            if request.json:
+            if request.mimetype == 'application/json' and request.json:
                 self.__assign_args(request.json)
             else:
                 if request.files:
